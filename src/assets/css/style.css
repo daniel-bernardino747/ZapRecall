@@ -37,7 +37,7 @@
   font-family: 'Recursive', cursive;
 } */
 
-.flashcard.acerto {
+/* .flashcard.acerto {
   color: var(--cor-zap);
   text-decoration: line-through;
 }
@@ -50,17 +50,17 @@
 .flashcard.erro {
   color: var(--cor-nao-lembrei);
   text-decoration: line-through;
-}
+} */
 
 
-.flashcard.aberto {
+/* .flashcard.aberto {
   min-height: 130px;
   display: flex;
   flex-direction: column;
   background-color: var(--cor-fundo-card);
   cursor: default;
   padding: 20px 10px;
-}
+} */
 
 .aberto div {
   width: 100%;
@@ -70,16 +70,16 @@
 
 
 
-.aberto.resposta div {
+/* .aberto.resposta div {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
-.aberto img {
+/* .aberto img {
   cursor: pointer;
-}
+} */
 
 /* .action {
   display: flex;

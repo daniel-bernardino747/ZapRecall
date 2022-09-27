@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
     display: flex;
@@ -27,7 +27,7 @@ export const Header = styled.header`
     }
 `;
 
-export const Main = styled.main`
+export const Main = styled.ul`
     max-height: 400px;
     overflow-y: auto;
 
@@ -36,21 +36,89 @@ export const Main = styled.main`
     }
 `;
 
-export const Flashcard = styled.section`
-    width: 300px;
-    height: 50px;
+const openFlash = css`
+
+    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cor-fundo-card);
+    cursor: default;
+    padding: 20px 10px;
+    position: relative;
+    font-weight: 400;
+
+    h1, h3 {
+        display: none;
+    }
+
+    div {
+        position: absolute;
+        bottom: 5px;
+        right: 15px;
+        cursor: pointer;
+    }
+`;
+
+const closeFlash = css`
+    background: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
+    font-weight: 700;
+
+    h2, h3 {
+        display: none;
+    }
+`;
+
+const showAnswer = css`
+    pointer-events: none;   
+
+    h1, h2, div {
+        display: none;
+    }
+
+    h3 {
+        display: initial;
+    }
+`;
+
+
+
+export const Flashcard = styled.li`
+    width: 300px;
+    height: 50px;
+    
     color: black;
     border-radius: 5px;
     margin: 10px 0px;
     padding: 10px 10px;
     cursor: pointer;
     font-family: 'Recursive', cursive;
-    font-weight: 700;
+    
+    ${props => props.toggle ? openFlash : closeFlash}
+    ${props => props.turn ? showAnswer : ''}
+    ${props => {
+        switch (props.userChoice) {
+            case 'no':
+                return css`
+                    color: var(--cor-nao-lembrei);
+                    text-decoration: line-through;
+                `;
+            case 'almost':
+                return css`
+                    color: var(--cor-quase-nao-lembrei);
+                    text-decoration: line-through;
+                `;
+            case 'yes':
+                return css`
+                    color: var(--cor-zap);
+                    text-decoration: line-through;
+                `;
+        };
+    }};
 `;
+
 
 export const Footer = styled.footer`
     position: fixed;

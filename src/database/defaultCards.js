@@ -9,7 +9,8 @@ const Cards = [
         icon: defaultIcon,
         show: false,
         turn: false,
-        userChoice: ''
+        userChoice: '',
+        standBy: false
     },
     {
         id: 2,
@@ -19,7 +20,8 @@ const Cards = [
         icon: defaultIcon,
         show: false,
         turn: false,
-        userChoice: ''
+        userChoice: '',
+        standBy: false
     }
 ];
 

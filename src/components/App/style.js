@@ -47,6 +47,7 @@ const openFlash = css`
     position: relative;
     font-weight: 400;
 
+
     h1, h3 {
         display: none;
     }
@@ -95,6 +96,7 @@ export const Flashcard = styled.li`
     padding: 10px 10px;
     cursor: pointer;
     font-family: 'Recursive', cursive;
+    pointer-events: ${props => props.standBy ? 'none' : 'default'};
     
     ${props => props.toggle ? openFlash : closeFlash}
     ${props => props.turn ? showAnswer : ''}
@@ -147,6 +149,9 @@ export const Box_buttons = styled.div`
     justify-content: space-around;
     align-items: center;
     gap: 10px;
+
+    pointer-events: ${props => props.turn ? 'default' : 'none'};
+    filter: saturate(${props => props.turn ? '1' : '0'});
 `;
 
 export const Button = styled.div`

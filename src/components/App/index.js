@@ -14,6 +14,7 @@ import { Container, Header, Main, Flashcard, Footer, Box_buttons, Button, Icon }
 export default function App() {
 
     const [listCards, setListCards] = useState(Cards);
+    const [anyElementClicked, setAnyElementClicked] = useState(false);
 
     const listFlashCards = listCards.map((f) =>
         <Flashcard
@@ -22,6 +23,7 @@ export default function App() {
             toggle={f.show}
             turn={f.turn}
             userChoice={f.userChoice}
+            standBy={f.standBy}
         >
             <h1>{f.title}</h1>
             <h2>{f.question}</h2>
@@ -34,27 +36,14 @@ export default function App() {
     function openFlashcard(id) {
 
         const elementClicked = listCards.filter((e) => e.id === id)[0];
-        console.log(elementClicked)
         let newList;
 
         if (elementClicked.show === true) {
 
-            if (elementClicked.turn === true) {
-                console.log('terceira vez')
-
-                const newChange = listCards.map(f => {
-
-                    if (f.id === id) {
-                        return { ...f, show: !f.show, turn: !f.turn }
-                    } else {
-                        return f
-                    }
-                });
-
-                newList = newChange.map(f => { return f.show ? { ...f, icon: IconTurn } : { ...f, icon: IconPlay } });
-
-            } else {
+            if (elementClicked.turn !== true) {
                 console.log('segunda vez')
+                setAnyElementClicked(true);
+
                 const newChange = listCards.map(f => {
 
                     if (f.id === id) {
@@ -75,15 +64,13 @@ export default function App() {
                 if (f.id === id) {
                     return { ...f, show: !f.show }
                 } else {
-                    return f
+                    return { ...f, standBy: true }
                 }
             });
 
             newList = newChange.map(f => { return f.show ? { ...f, icon: IconTurn } : { ...f, icon: IconPlay } });
         }
-        console.log(newList)
         setListCards(newList);
-
     };
 
     function userRememberAnswer(answer) {
@@ -92,13 +79,11 @@ export default function App() {
         const newChange = listCards.map(f => {
 
             if (f.id === elementClicked.id) {
-                console.log('AQUI', f)
                 return { ...f, userChoice: answer, show: !f.show, turn: !f.turn }
             } else {
                 return f
             }
         });
-        console.log('NEW CHANGE', newChange)
 
         const newList = newChange.map((f) => {
             if (f.userChoice === 'no') {
@@ -114,15 +99,17 @@ export default function App() {
                 return { ...f, icon: IconCorrect }
 
             } else {
-                return f
+                return { ...f, standBy: false }
             }
         })
 
-
         setListCards(newList);
+        setAnyElementClicked(false);
     }
 
-    console.log(listCards)
+    console.log(listCards);
+
+    const completedCards = listCards.filter((f) => f.userChoice !== '').length;
 
     return (
         <>
@@ -138,12 +125,12 @@ export default function App() {
                 </Main>
 
                 <Footer>
-                    <Box_buttons>
+                    <Box_buttons turn={anyElementClicked}>
                         <Button onClick={() => userRememberAnswer('no')} color="var(--cor-nao-lembrei)">Não lembrei</Button>
                         <Button onClick={() => userRememberAnswer('almost')} color="var(--cor-quase-nao-lembrei)">Quase não lembrei</Button>
                         <Button onClick={() => userRememberAnswer('yes')} color="var(--cor-zap)">Zap!</Button>
                     </Box_buttons>
-                    <h1>0/4 CONCLUÍDOS</h1>
+                    <h1>{completedCards}/{listCards.length} CONCLUÍDOS</h1>
                 </Footer>
 
             </Container>

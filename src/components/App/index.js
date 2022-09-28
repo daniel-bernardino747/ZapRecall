@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cards from "../../database/defaultCards";
 
 import Logo from "../../assets/img/logo.png";
@@ -9,12 +9,16 @@ import IconHelp from "../../assets/img/help-icon.svg"
 import IconIncorrect from "../../assets/img/incorrect-icon.svg"
 
 import GlobalStyle from "../GlobalStyle";
-import { Container, Header, Main, Flashcard, Footer, Box_buttons, Button, Icon, BlaBla } from "./style";
+import { Header, Main, Flashcard, Footer, Box_buttons, Button, Icon } from "./style";
 
 export default function App() {
 
     const [listCards, setListCards] = useState(Cards);
-    const [anyElementClicked, setAnyElementClicked] = useState(false);
+    /* const [anyElementClicked, setAnyElementClicked] = useState(false); */
+
+    useEffect(() => {
+        console.log(listCards);
+    }, [listCards])
 
     const listFlashCards = listCards.map((f) =>
         <Flashcard
@@ -25,10 +29,18 @@ export default function App() {
             userChoice={f.userChoice}
             standBy={f.standBy}
         >
-            <h1>{f.title}</h1>
-            <h2>{f.question}</h2>
-            <h3>{f.answer}</h3>
-            <div><Icon src={f.icon} /></div>
+            <span>
+                <h1>{f.title}</h1>
+                <h2>{f.question}</h2>
+                <h3>{f.answer}</h3>
+            </span>
+
+            <Box_buttons>
+                <Button onClick={() => userRememberAnswer('no', f.id)} color="var(--cor-nao-lembrei)">Não lembrei</Button>
+                <Button onClick={() => userRememberAnswer('almost', f.id)} color="var(--cor-quase-nao-lembrei)">Quase não lembrei</Button>
+                <Button onClick={() => userRememberAnswer('yes', f.id)} color="var(--cor-zap)">Zap!</Button>
+            </Box_buttons>
+            <Icon src={f.icon} />
         </Flashcard>
     );
 
@@ -41,7 +53,6 @@ export default function App() {
 
             if (elementClicked.turn !== true) {
                 console.log('segunda vez')
-                setAnyElementClicked(true);
 
                 const newChange = listCards.map(f => {
 
@@ -53,6 +64,8 @@ export default function App() {
                 });
 
                 newList = newChange.map(f => f);
+            } else {
+                return
             }
 
         } else {
@@ -67,15 +80,16 @@ export default function App() {
                 }
             });
 
-            newList = newChange.map(f => { return f.show ? { ...f, icon: IconTurn } : { ...f, icon: IconPlay } });
+            newList = newChange.map(f => { return f.show ? { ...f, icon: IconTurn } : f });
         }
         setListCards(newList);
     };
 
-    function userRememberAnswer(answer) {
+    function userRememberAnswer(answer, id) {
 
 
-        const elementClicked = listCards.filter((e) => e.show)[0];
+        const elementClicked = listCards.filter((e) => e.id === id)[0];
+        console.log("elementClicked", elementClicked)
         const newChange = listCards.map(f => {
 
             if (f.id === elementClicked.id) {
@@ -84,6 +98,8 @@ export default function App() {
                 return f
             }
         });
+
+        console.log("newChange", newChange)
 
         const newList = newChange.map((f) => {
             if (f.userChoice === 'no') {
@@ -102,8 +118,9 @@ export default function App() {
                 return { ...f, standBy: false }
             }
         })
+
+        console.log("newList", newList);
         setListCards(newList);
-        setAnyElementClicked(false);
     }
 
     const completedCards = listCards.filter((i) => i.userChoice !== '').length;
@@ -121,13 +138,11 @@ export default function App() {
             </Main>
 
             <Footer>
-                <Box_buttons turn={anyElementClicked}>
-                    <Button onClick={() => userRememberAnswer('no')} color="var(--cor-nao-lembrei)">Não lembrei</Button>
-                    <Button onClick={() => userRememberAnswer('almost')} color="var(--cor-quase-nao-lembrei)">Quase não lembrei</Button>
-                    <Button onClick={() => userRememberAnswer('yes')} color="var(--cor-zap)">Zap!</Button>
-                </Box_buttons>
-
                 <h1>{completedCards}/{listCards.length} CONCLUÍDOS</h1>
+
+                <div>
+                    {listCards.filter((i) => i.icon !== IconPlay && i.icon !== IconTurn).map((i) => <Icon src={i.icon} />)}
+                </div>
             </Footer>
 
             <GlobalStyle />

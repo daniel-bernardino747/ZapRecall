@@ -1,10 +1,5 @@
 import styled, { css } from "styled-components";
 
-/* export const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-`; */
-
 export const Header = styled.header`
     position: fixed;
     height: 80px;
@@ -41,21 +36,21 @@ const openFlash = css`
     min-height: 130px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     background-color: var(--cor-fundo-card);
     cursor: default;
-    padding: 20px 10px;
+    padding: 20px 10px 10px 10px;
     position: relative;
     font-weight: 400;
 
 
-    h1, h3 {
+    h1, h3, section {
         display: none;
     }
 
-    div {
-        position: absolute;
-        bottom: 5px;
-        right: 15px;
+    img {
+        align-self: end;
+        margin-right: 1px;
         cursor: pointer;
     }
 `;
@@ -67,20 +62,17 @@ const closeFlash = css`
     align-items: center;
     font-weight: 700;
 
-    h2, h3 {
+    h2, h3, section {
         display: none;
     }
 `;
 
 const showAnswer = css`
-    pointer-events: none;   
-
-    h1, h2, div {
+    h1, h2, img {
         display: none;
     }
-
-    h3 {
-        display: initial;
+    h3, section {
+        display: flex;
     }
 `;
 
@@ -134,29 +126,31 @@ export const Footer = styled.footer`
     padding: 14px 10px;
     font-size: 18px;
     color: black;
-    position: fixed;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    justify-content: space-around;
+    gap: 7px;
+
+    img {
+        margin: 0 5px;
+    }
 `;
 
-export const Box_buttons = styled.div`
+export const Box_buttons = styled.section`
     display: flex;
     width: 100%;
     padding: 0 5px;
     justify-content: space-around;
     align-items: center;
-    gap: 10px;
-
-    pointer-events: ${props => props.turn ? 'default' : 'none'};
-    filter: saturate(${props => props.turn ? '1' : '0'});
+    text-align: center;
+    gap: 5px;
 `;
 
 export const Button = styled.div`
-    width: 100%;
-    height: 40px;
+    width: 120px;
+    height: 30px;
     background-color: ${props => props.color};
     color: white;
     font-size: 12px;
@@ -175,8 +169,4 @@ export const Button = styled.div`
 export const Icon = styled.img`
     width: 23px;
     height: 23px;
-`;
-
-export const BlaBla = styled.div`
-    display: none;
 `;

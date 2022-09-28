@@ -71,6 +71,11 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Recursive', sans-serif;
         font-weight: 400;
     }
+
+    .root {
+        display: flex;
+        flex-direction: column;
+    }
 `;
 
 export default GlobalStyle;

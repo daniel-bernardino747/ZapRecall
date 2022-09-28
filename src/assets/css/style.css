@@ -62,13 +62,13 @@
   padding: 20px 10px;
 } */
 
-.aberto div {
+/* .aberto div {
   width: 100%;
   display: flex;
   justify-content: flex-end;
 }
 
-
+ */
 
 /* .aberto.resposta div {
   width: 100%;
@@ -119,19 +119,19 @@
   background-color: var(--cor-zap);
 } */
 
-
+/* 
 .icone,
 img.icone {
   color: var(--preto);
   width: 23px;
   height: 23px;
-}
+} */
 
 /* .icone svg {
   width: 23px;
   height: 23px;
 } */
-
+/* 
 
 .icone .erro {
   color: var(--nao-lembrei);
@@ -144,7 +144,7 @@ img.icone {
 .icone .acerto {
   color: var(--cor-zap);
 }
-
+ */
 
 /* .deck {
   display: flex;

@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 
-export const Container = styled.div`
+/* export const Container = styled.div`
     display: flex;
     flex-direction: column;
-`;
+`; */
 
 export const Header = styled.header`
     position: fixed;
@@ -175,4 +175,8 @@ export const Button = styled.div`
 export const Icon = styled.img`
     width: 23px;
     height: 23px;
+`;
+
+export const BlaBla = styled.div`
+    display: none;
 `;

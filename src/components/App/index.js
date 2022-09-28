@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Cards from "../../database/defaultCards";
 
 import Logo from "../../assets/img/logo.png";
@@ -9,7 +9,7 @@ import IconHelp from "../../assets/img/help-icon.svg"
 import IconIncorrect from "../../assets/img/incorrect-icon.svg"
 
 import GlobalStyle from "../GlobalStyle";
-import { Container, Header, Main, Flashcard, Footer, Box_buttons, Button, Icon } from "./style";
+import { Container, Header, Main, Flashcard, Footer, Box_buttons, Button, Icon, BlaBla } from "./style";
 
 export default function App() {
 
@@ -31,7 +31,6 @@ export default function App() {
             <div><Icon src={f.icon} /></div>
         </Flashcard>
     );
-
 
     function openFlashcard(id) {
 
@@ -75,11 +74,12 @@ export default function App() {
 
     function userRememberAnswer(answer) {
 
+
         const elementClicked = listCards.filter((e) => e.show)[0];
         const newChange = listCards.map(f => {
 
             if (f.id === elementClicked.id) {
-                return { ...f, userChoice: answer, show: !f.show, turn: !f.turn }
+                return { ...f, userChoice: answer, show: !f.show, turn: !f.turn, standBy: true }
             } else {
                 return f
             }
@@ -102,38 +102,33 @@ export default function App() {
                 return { ...f, standBy: false }
             }
         })
-
         setListCards(newList);
         setAnyElementClicked(false);
     }
 
-    console.log(listCards);
+    const completedCards = listCards.filter((i) => i.userChoice !== '').length;
 
-    const completedCards = listCards.filter((f) => f.userChoice !== '').length;
 
     return (
         <>
-            <Container>
+            <Header>
+                <img src={Logo} />
+                <h1>ZapRecall</h1>
+            </Header>
 
-                <Header>
-                    <img src={Logo} />
-                    <h1>ZapRecall</h1>
-                </Header>
+            <Main>
+                {listFlashCards.map((i) => <>{i}</>)}
+            </Main>
 
-                <Main>
-                    {listFlashCards.map((i) => <>{i}</>)}
-                </Main>
+            <Footer>
+                <Box_buttons turn={anyElementClicked}>
+                    <Button onClick={() => userRememberAnswer('no')} color="var(--cor-nao-lembrei)">Não lembrei</Button>
+                    <Button onClick={() => userRememberAnswer('almost')} color="var(--cor-quase-nao-lembrei)">Quase não lembrei</Button>
+                    <Button onClick={() => userRememberAnswer('yes')} color="var(--cor-zap)">Zap!</Button>
+                </Box_buttons>
 
-                <Footer>
-                    <Box_buttons turn={anyElementClicked}>
-                        <Button onClick={() => userRememberAnswer('no')} color="var(--cor-nao-lembrei)">Não lembrei</Button>
-                        <Button onClick={() => userRememberAnswer('almost')} color="var(--cor-quase-nao-lembrei)">Quase não lembrei</Button>
-                        <Button onClick={() => userRememberAnswer('yes')} color="var(--cor-zap)">Zap!</Button>
-                    </Box_buttons>
-                    <h1>{completedCards}/{listCards.length} CONCLUÍDOS</h1>
-                </Footer>
-
-            </Container>
+                <h1>{completedCards}/{listCards.length} CONCLUÍDOS</h1>
+            </Footer>
 
             <GlobalStyle />
         </>

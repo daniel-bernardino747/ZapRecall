@@ -87,6 +87,7 @@ export const Flashcard = styled.li`
     margin: 10px 0px;
     padding: 10px 10px;
     cursor: pointer;
+    background-color: --cor-fundo-card;
     font-family: 'Recursive', cursive;
     pointer-events: ${props => props.standBy ? 'none' : 'default'};
     

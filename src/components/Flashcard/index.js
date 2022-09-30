@@ -31,41 +31,39 @@ export default function FlashCards({ listCards, setListCards }) {
     function openFlashcard(id) {
 
         const elementClicked = listCards.filter((e) => e.id === id)[0];
+        const showAnswerCard = elementClicked.show === true;
+        const turnedCard = elementClicked.turn === true;
         let newList;
 
-        if (elementClicked.show === true) {
+        if (showAnswerCard) {
 
-            if (elementClicked.turn !== true) {
-                console.log('segunda vez')
-
+            if (!turnedCard) {
                 const newChange = listCards.map(f => {
 
                     if (f.id === id) {
                         return { ...f, turn: !f.turn }
                     } else {
                         return f
-                    }
+                    };
                 });
 
-                newList = newChange.map(f => f);
+                newList = newChange;
             } else {
-                return
-            }
+                return;
+            };
 
         } else {
-            console.log('primeira vez')
-
             const newChange = listCards.map(f => {
 
                 if (f.id === id) {
                     return { ...f, show: !f.show }
                 } else {
                     return { ...f, standBy: true }
-                }
+                };
             });
 
             newList = newChange.map(f => { return f.show ? { ...f, icon: IconTurn } : f });
-        }
+        };
         setListCards(newList);
     };
 

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Interface from "../Interface";
+import Welcome from "../Welcome";
 
 import Cards from "../../database/defaultCards";
-import Logo from "../../assets/img/logo.png";
 
 import GlobalStyle from "../GlobalStyle";
-import { Header } from "./style";
 
 export default function App() {
 
@@ -13,10 +12,7 @@ export default function App() {
 
     return (
         <>
-            <Header>
-                <img src={Logo} />
-                <h1>ZapRecall</h1>
-            </Header>
+            <Welcome />
 
             <Interface listCards={listCards} setListCards={setListCards} />
 

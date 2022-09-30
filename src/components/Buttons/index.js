@@ -1,27 +1,25 @@
 import React from 'react';
 
-
-import IconCorrect from "../../assets/img/correct-icon.svg"
-import IconHelp from "../../assets/img/help-icon.svg"
-import IconIncorrect from "../../assets/img/incorrect-icon.svg"
+import IconCorrect from "../../assets/img/correct-icon.svg";
+import IconHelp from "../../assets/img/help-icon.svg";
+import IconIncorrect from "../../assets/img/incorrect-icon.svg";
 
 import { Box_buttons, Button } from "./style";
 
 export default function Buttons({ id, listCards, setListCards }) {
+
     function userRememberAnswer(answer, id) {
 
         const elementClicked = listCards.filter((e) => e.id === id)[0];
-        console.log("elementClicked", elementClicked)
+
         const newChange = listCards.map(f => {
 
             if (f.id === elementClicked.id) {
                 return { ...f, userChoice: answer, show: !f.show, turn: !f.turn, standBy: true }
             } else {
                 return f
-            }
+            };
         });
-
-        console.log("newChange", newChange)
 
         const newList = newChange.map((f) => {
             if (f.userChoice === 'no') {
@@ -38,10 +36,8 @@ export default function Buttons({ id, listCards, setListCards }) {
 
             } else {
                 return { ...f, standBy: false }
-            }
-        })
-
-        console.log("newList", newList);
+            };
+        });
         setListCards(newList);
     }
 

@@ -3,8 +3,9 @@ import FlashCards from '../Flashcard';
 
 import IconPlay from "../../assets/img/play-outline-icon.svg";
 import IconTurn from "../../assets/img/rotate-icon.svg";
+import Logo from "../../assets/img/logo.png";
 
-import { Main, Footer, Icon } from "./style";
+import { Main, Header, Footer, Icon } from "./style";
 
 
 export default function Interface({ listCards, setListCards }) {
@@ -13,6 +14,11 @@ export default function Interface({ listCards, setListCards }) {
 
     return (
         <>
+            <Header>
+                <img src={Logo} />
+                <h1>ZapRecall</h1>
+            </Header>
+
             <Main>
                 <FlashCards listCards={listCards} setListCards={setListCards} />
             </Main>

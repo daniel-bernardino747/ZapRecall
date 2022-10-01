@@ -1,15 +1,12 @@
 import React from 'react';
 import Buttons from '../Buttons';
-
+import { Card, Icon } from "./style";
 import IconTurn from "../../assets/img/rotate-icon.svg";
-
-import { Flashcard, Icon } from "./style";
-
 
 export default function FlashCards({ listCards, setListCards }) {
 
     const listFlashCards = listCards.map((f) =>
-        <Flashcard
+        <Card
             key={f.id}
             onClick={() => openFlashcard(f.id)}
             toggle={f.show}
@@ -25,7 +22,7 @@ export default function FlashCards({ listCards, setListCards }) {
 
             <Buttons id={f.id} listCards={listCards} setListCards={setListCards} />
             <Icon src={f.icon} />
-        </Flashcard>
+        </Card>
     );
 
     function openFlashcard(id) {

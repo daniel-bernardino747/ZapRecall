@@ -59,3 +59,7 @@ export const Icon = styled.img`
     width: 23px;
     height: 23px;
 `;
+
+export const ResultFinal = styled.div`
+    display: flex;
+`;

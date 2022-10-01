@@ -9,7 +9,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    z-index: 2;
+    z-index: 3;
     position: absolute;
     background-color: var(--cor-fundo);
     gap: 30px;
@@ -46,6 +46,43 @@ export const Container = styled.div`
 
         &:hover {
             background-color: #cea2a0; 
+        }
+    }
+`;
+
+export const ContainerMetas = styled(Container)`
+    display: ${props => props.show ? 'flex' : 'none'};
+    z-index: 2;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        select {
+            width: 246px;
+            height: 44px;
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+            color: #ADADAD;
+        }
+
+        input {
+            width: 246px;
+            height: 54px;
+            padding: 16px 22px;
+            border-radius: 5px;
+            border: 1px solid #D70900;
+            color: #D70900;
+            border: 1px;
+            font-size: 18px;
+            cursor: pointer;
+            font-family: 'Recursive';
+
+            &:hover {
+                background-color: #cea2a0; 
+            }
         }
     }
 `;

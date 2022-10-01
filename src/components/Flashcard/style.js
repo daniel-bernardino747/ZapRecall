@@ -48,7 +48,7 @@ h3, section {
 
 
 
-export const Flashcard = styled.li`
+export const Card = styled.li`
 width: 300px;
 height: 50px;
 
